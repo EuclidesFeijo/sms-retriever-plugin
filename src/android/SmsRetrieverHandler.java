@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -28,7 +29,13 @@ public class SmsRetrieverHandler {
     void startBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-        this.activity.registerReceiver(mSmsBroadcastReceiver, intentFilter);
+        //this.activity.registerReceiver(mSmsBroadcastReceiver, intentFilter);
+        ContextCompat.registerReceiver(
+            this.activity,
+            mSmsBroadcastReceiver,
+            intentFilter,
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        );
     }
 
     protected OtpReceivedInterface<String> onOtpReceived;
