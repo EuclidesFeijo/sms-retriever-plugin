@@ -14,6 +14,16 @@
             <param name="android-package" value="com.outsystems.smsretriever.SmsRetrieverPlugin" />
          </feature>
       </config-file>
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver
+                android:name="ao.unitel.SmsRetriever"
+                android:permission="com.google.android.gms.auth.api.phone.permission.SEND"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
+                </intent-filter>
+            </receiver>
+        </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
 
     <!-- Adding files and gradle configuration to SmsRetrieverPlugin -->
