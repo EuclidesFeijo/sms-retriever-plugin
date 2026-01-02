@@ -29,12 +29,14 @@ public class SmsRetrieverHandler {
     void startBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-        //this.activity.registerReceiver(mSmsBroadcastReceiver, intentFilter);
+        
+        // No Android 14, para ouvir o SMS Retriever (que vem do Google Play Services),
+        // o receiver PRECISA ser EXPORTED.
         ContextCompat.registerReceiver(
             this.activity,
             mSmsBroadcastReceiver,
             intentFilter,
-            ContextCompat.RECEIVER_NOT_EXPORTED
+            ContextCompat.RECEIVER_EXPORTED  // ALTERADO AQUI
         );
     }
 
